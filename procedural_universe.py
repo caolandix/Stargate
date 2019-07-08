@@ -4,11 +4,14 @@ import argparse
 import dice
 
 class Universe:
-    def __init__(self):
-        pass
+    def __init__(self, num_star_systems = 10):
+        self.star_systems = []
     
     def generate(self):
-        pass
+        for i in range(0, num_star_systems):
+            star_system = StarSystem()
+            star_system.generate()
+            self.star_systems.append(star_system)
     
 class StarSystem:
     def __init__(self):
@@ -33,7 +36,7 @@ class Star:
     
     (oribital_object_data[star_class])[star_type] = < Stellar Mass = idx0, Biozone range = idx1, Inner Limit = idx2, Stellar Radius = idx3, Planets On = idx4, Num Orbits = idx5, Life Roll Modifier = idx6 >)
     """
-    self.orbital_object_data = {
+    orbital_object_data = {
         "O" : {
                 "Ia" : [ 70.0, (790.0, 1190.0), 16.0, 0.2, 0, [], -12 ],
                 "Ib" : [ 60.0, (630.0, 950.0),  13.0, 0.1, 0, [], -12 ],
@@ -191,97 +194,16 @@ class Star:
         self.planets_on = star_data[4]
         self.num_orbits = star_data[5]
         self.life_roll_mod = star_data[6]
-        """
-        if self.star_type == "O":
-            self.planets_on = 0
-            self.num_orbits = 0
-            if self.star_class == "Ia":
-                self.stellar_mass = 70
-                self.biozone = (790, 1190)
-                self.inner_limit = 16
-                self.stellar_radius = 0.2
-                self.life_roll_mod = -12
-            elif self.star_class == "Ib":
-                self.stellar_mass = 60
-                self.biozone = (630, 950)
-                self.inner_limit = 13
-                self.stellar_radius = 0.1
-                self.life_roll_mod = -12
-            elif self.star_class == "V":
-                self.stellar_mass = 50
-                self.biozone = (500, 750)
-                self.inner_limit = 10
-                self.stellar_radius = 0.0
-                self.life_roll_mod = -9
-            else:
-                print("Invalid Star class: %s, for this star type: %s" % (self.star_class, self.star_type))
-        elif self.star_type == "B":
-            if self.star_class == "Ia":
-                self.planets_on = 0
-                self.num_orbits = 0
-                self.stellar_mass = 70
-                self.biozone = (790, 1190)
-                self.inner_limit = 16
-                self.stellar_radius = 0.2
-                self.life_roll_mod = -12
-            if self.star_class == "Ib":
-                self.planets_on = 0
-                self.num_orbits = 0
-                self.stellar_mass = 70
-                self.biozone = (790, 1190)
-                self.inner_limit = 16
-                self.stellar_radius = 0.2
-                self.life_roll_mod = -12
-            if self.star_class == "II":
-                self.planets_on = 0
-                self.num_orbits = 0
-                self.stellar_mass = 70
-                self.biozone = (790, 1190)
-                self.inner_limit = 16
-                self.stellar_radius = 0.2
-                self.life_roll_mod = -12
-            if self.star_class == "III":
-                self.planets_on = 0
-                self.num_orbits = 0
-                self.stellar_mass = 70
-                self.biozone = (790, 1190)
-                self.inner_limit = 16
-                self.stellar_radius = 0.2
-                self.life_roll_mod = -12
-            if self.star_class == "IV":
-                self.planets_on = 0
-                self.num_orbits = 0
-                self.stellar_mass = 70
-                self.biozone = (790, 1190)
-                self.inner_limit = 16
-                self.stellar_radius = 0.2
-                self.life_roll_mod = -12
-            if self.star_class == "V":
-                self.planets_on = 0
-                self.num_orbits = 0
-                self.stellar_mass = 70
-                self.biozone = (790, 1190)
-                self.inner_limit = 16
-                self.stellar_radius = 0.2
-                self.life_roll_mod = -12
-        elif self.star_type == "A":
-        elif self.star_type == "F":
-        elif self.star_type == "G":
-        elif self.star_type == "K":
-        elif self.star_type == "M":
-        else:
-        """
-
 
     def generate(self):
-        determine_star_class()
+        self.determine_star_class()
         if self.star_class == "V":
-            determine_mainseq_type()
+            self.determine_mainseq_type()
         elif self.star_class in [ "Ia", "Ib", "II", "III", "IV" ]:
-            determine_giant_type()
+            self.determine_giant_type()
         elif self.star_class == "D":
-            determine_dwarf_type()
-        generate_orbital_bodies()
+            self.determine_dwarf_type()
+        self.generate_orbital_bodies()
             
         
         
